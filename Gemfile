@@ -8,6 +8,9 @@ gem 'rails', '4.0.2'
 
 # Use sqlite3 as the database for Active Record
 
+# Strong Parameters/Protected Attributes gem
+gem 'protected_attributes'
+
 group :production do
   gem 'pg'
 end
