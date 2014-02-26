@@ -12,15 +12,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
-    if @post.save
-       flash[:notice] ="Post was saved."
-       redirect_to @post
-    else
-       flash[:error] = "There was an error saving the post. Please try again."
-       render :new
-      end
-    end
+    @post = current_user.posts.build(params[:post])
+  end
 
   def edit
     @post = Post.find(params[:id])
@@ -37,3 +30,4 @@ class PostsController < ApplicationController
   end
  end
 end
+
