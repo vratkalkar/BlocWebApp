@@ -8,8 +8,6 @@ gem 'rails', '4.0.2'
 
 # Use sqlite3 as the database for Active Record
 
-# Strong Parameters/Protected Attributes gem
-gem 'protected_attributes'
 
 group :production do
   gem 'pg'
@@ -53,7 +51,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+ gem 'bcrypt', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -63,3 +61,6 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Use Devise for Authentication
+  gem 'devise'
