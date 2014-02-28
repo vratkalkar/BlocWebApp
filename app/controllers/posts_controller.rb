@@ -1,29 +1,38 @@
 class PostsController < ApplicationController
   def index
-    @post = Post.all
+    @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
+    @posts = Post.find(params[:id])
   end
 
   def new
-    @post = Post.new
+    @posts = Post.new
   end
 
   def create
-    @post = current_user.post.build(params[:post])
- end
+     @posts = Post.new(params[:post])
+  
+       if @posts.save
+         flash[:notice] = "Post was saved."
+          redirect_to @posts
+     else
+         flash[:error] = "There was an error saving the post. Please try again."
+       render :new
+      end
+    end
+
 
   def edit
-    @post = Post.find(params[:id])
+    @posts = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update_attributes(params[:post])
+    @posts = Post.find(params[:id])
+    if @posts.update_attributes(params[:posts])
       flash[:notice] = "Post was updated."
-      redirect_to @post
+      redirect_to @posts
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :edit
