@@ -68,3 +68,13 @@ end
 
 # Use Devise for Authentication
   gem 'devise'
+
+# Use CanCan for Authorization
+
+  gem 'cancan'
+
+# CancanStrongParameters
+
+  gem 'cancan_strong_parameters'
+
+
