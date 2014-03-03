@@ -1,7 +1,12 @@
 <h1><%= @posts.title %></h1>
 
-<% if can? :edit, @posts %>
- <%= link_to "Edit", edit_post_path(@posts), class: 'btn btn-mini' %>
-<% end %>
-
-<p><%= @posts.body %></p>
+<div class="row">
+  <div class="span8">
+    <p><%= @post.body %></p>
+  </div>
+  <div class="span4">
+    <% if can? :edit, @post %>
+     <%= link_to "Edit", edit_topic_post+ath(@topics,@posts), class: 'btn btn-large btn-block' %>
+     <% end %>
+   </div>
+ </div>
