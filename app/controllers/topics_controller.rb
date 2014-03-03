@@ -1,38 +1,38 @@
 class TopicsController < ApplicationController
   def index
-    @topic = Topic.all
+    @topics = Topic.all
   end
 
   def new
-    @topic = Topic.new
-    authorize! :create, @topic, message: "You need to be an admin to do that."
+    @topics = Topic.new
+    authorize! :create, @topics, message: "You need to be an admin to do that."
   end
 
   def show
-    @topic = Topic.find(params[:id])
-    @posts = @topic.posts
+    @topics = Topic.find(params[:id])
+    @posts = @topics.posts
   end
 
   def edit
-    @topic = Topic.find(params[:id])
-    authorize! :update, @topic, message: "You need to be an admin to do that."
+    @topics = Topic.find(params[:id])
+    authorize! :update, @topics, message: "You need to be an admin to do that."
   end
 
   def create
-    @topic = Topic.new(params[:topic])
-    authorize! :create, @topic, message: "You need to be an admin to do that"
+    @topics = Topic.new(params[:topic])
+    authorize! :create, @topics, message: "You need to be an admin to do that"
     if @topic.save
-      redirect_to @topic, notice: "Topic was saved successfully."
+      redirect_to @topics, notice: "Topic was saved successfully."
     else
       flash[:error] = "Error creating topic. Please try again."
  end
 end
 
 def update
-  @topic = Topic.find(params[:id])
-  authorize! :update, @topic, message: "You need to own the topic to update it."
-  if @topic.update_attributes(params[:topic])
-   redirect_to @topic, notice: "Topic was saved successfully."
+  @topics = Topic.find(params[:id])
+  authorize! :update, @topics, message: "You need to own the topic to update it."
+  if @topics.update_attributes(params[:topic])
+   redirect_to @topics, notice: "Topic was saved successfully."
  else
    flash[:error] = "Error saving topic. Please try again"
    render :edit

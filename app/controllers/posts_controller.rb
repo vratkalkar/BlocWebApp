@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   def create
     @topics= Topic.find(params[:topic_id])
     @posts = current_user.posts.build(params[:post])
-    @posts.topic = @topics
+    @posts.topics = @topics
 
   authorize! :create, @posts, message: "You need to be signed up to do that."
        if @posts.save
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    Atopics = Topic.find(params[:topic_id])
+    @topics = Topic.find(params[:topic_id])
     @posts = Post.find(params[:id])
     authorize! :update, @posts, message: "You need to own the post to edit it."
     if @posts.update_attributes(params[:posts])
