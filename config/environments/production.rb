@@ -77,4 +77,7 @@ Bloccit::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # http://vr-bloccit.herokuapp.com
+ config.action_mailer.default_url_options = { :host => 'vr-bloccit.herokuapp.com'}
 end
