@@ -9,3 +9,4 @@ if Rails.env.production?
     :domain           => 'heroku.com',
     :enable_starttls_auto => true
 }
+end
