@@ -77,4 +77,8 @@ end
 
   gem 'cancan_strong_parameters'
 
+# Redcarpet for post markdown support
+
+ gem 'redcarpet'
+
 
