@@ -94,6 +94,5 @@ gem 'figaro'
 
 gem 'protected_attributes'
 
-gem 'image_magick'
 
 
