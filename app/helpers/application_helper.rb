@@ -14,3 +14,4 @@ def markdown(text)
   (redcarpet.render text).html_safe
   end
  end
+

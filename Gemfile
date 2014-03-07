@@ -39,10 +39,6 @@ gem 'jquery-rails'
 
 gem 'faker'
 
-# Strong Parameters
-
-gem 'protected_attributes'
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -73,12 +69,31 @@ end
 
   gem 'cancan'
 
-# CancanStrongParameters
-
-  gem 'cancan_strong_parameters'
 
 # Redcarpet for post markdown support
 
  gem 'redcarpet'
+
+ # MiniMagick for photos
+
+ gem 'mini_magick'
+
+# Carrierwave for photo uploads
+ 
+ gem 'carrierwave'
+
+# Fog cloud services library for S3
+
+gem 'fog'
+
+# Figaro for credential handling
+
+gem 'figaro'
+
+# Strong Parameters
+
+gem 'protected_attributes'
+
+gem 'image_magick'
 
 

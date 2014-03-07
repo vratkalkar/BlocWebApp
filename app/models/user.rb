@@ -3,10 +3,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  attr_accessible :email, :password, :password_confirmation, :remember_me , :name
+  attr_accessible :email, :password, :password_confirmation, :remember_me , :name, :avatar
   has_many :posts
   
   before_create :set_member
+  mount_uploader :avatar, AvatarUploader
 
 ROLES = %w[member moderator admin]
   def role?(base_role)
