@@ -1,6 +1,6 @@
 # Add application configuration variables here, as shown below.
 
-AWS_ACCESS_KEY_ID: "AKIAJIXJSO46AJQSHTBA "
+AWS_ACCESS_KEY_ID: "AKIAJIXJSO46AJQSHTBA"
 AWS_SECRET_ACCESS_KEY: "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"
 development:
  SENDGRID_USERNAME: "app22330684@heroku.com"
