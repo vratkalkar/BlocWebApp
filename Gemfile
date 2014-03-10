@@ -94,5 +94,9 @@ gem 'figaro'
 
 gem 'protected_attributes'
 
+# Encode AWS String
+
+gem 'unf'
+
 
 
