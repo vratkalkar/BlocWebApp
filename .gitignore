@@ -15,6 +15,3 @@
 /log/*.log
 /tmp
 
-# Carrierwave image
-
-  public/uploads
