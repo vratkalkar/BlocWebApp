@@ -30,7 +30,7 @@ GEM
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
-    bootstrap-sass (2.3.1.3)
+    bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.1.4)
     cancan (1.6.10)
@@ -162,7 +162,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.2)
-  bootstrap-sass (~> 2.3.1.0)
+  bootstrap-sass (~> 3.1.1)
   cancan
   carrierwave
   coffee-rails (~> 4.0.0)
