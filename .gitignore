@@ -15,8 +15,7 @@
 /log/*.log
 /tmp
 
-# CarrierWave photo uploads
-  
+# Carrierwave image
   public/uploads
 
 # Application YML file
