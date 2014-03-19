@@ -65,9 +65,9 @@ end
 # Use Devise for Authentication
   gem 'devise'
 
-# Use CanCan for Authorization
+# Use Pundit for Authorization
 
-  gem 'cancan'
+  gem 'pundit'
 
 
 # Redcarpet for post markdown support

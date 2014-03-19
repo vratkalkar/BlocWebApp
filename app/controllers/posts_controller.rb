@@ -1,30 +1,35 @@
 class PostsController < ApplicationController
-  
+
+  def index
+    @posts = Posts.all
+    authorize @posts
+  end
+
   def show
-    @posts = Post.find(params[:id])
-    @topics = Topic.find(params[:topic_id])
+    @posts = Posts.find(params[:id])
+    @posts = Topics.find(params[:id])
+    @posts = @posts.new
+    authorize @posts
   end
 
   def new
-    @topics = Topic.find(params[:topic_id])
-    @posts = Post.new
-    authorize! :create, Post, message: "You need to be a member to create a new post."
-  end
+    @topics = Topics.find(params[:id])
+    @post = Post.new
+    authorize @posts
 
   def create
-    @topics= Topic.find(params[:topic_id])
-    @posts = current_user.posts.build(params[:post])
-    @posts = @topics
+    @topics = Topics.find(params[:id])
+    @post = current_user.posts.build(params.require(:post].permit(:title, :body))
+    @post.topic = @topics
 
-  authorize! :create, @posts, message: "You need to be signed up to do that."
-       if @posts.save
-         flash[:notice] = "Post was saved."
-          redirect_to @posts
+  authorize @post
+       if @post.save
+          redirect_to [@topics, @post], notice: "Post was saved successfully."
      else
          flash[:error] = "There was an error saving the post. Please try again."
        render :new
 
-       authorize! :create, @posts, message: "You need to be signed up to do that."
+       authorize! :create, @post, message: "You need to be signed up to do that."
         if @posts.save
       end
      end
@@ -33,22 +38,27 @@ class PostsController < ApplicationController
 
 
   def edit
-    @topics = Topic.find(params[:topic_id])
-    @posts = Post.find(params[:id])
-    authorize! :edit, @posts, message: "You need to own the post to edit it."
+    @topics = Topics.find(params[:topic_id])
+    @post = Post.find(params[:id])
+    authorize @posts
   end
 
   def update
-    @topics = Topic.find(params[:topic_id])
-    @posts = Post.find(params[:id])
-    authorize! :update, @posts, message: "You need to own the post to edit it."
-    if @posts.update_attributes(params[:posts])
+    @topics = Topics.find(params[:topic_id])
+    @post = Post.find(params[:id])
+    authorize @post
+    if @posts.update(post_params(:posts))
       flash[:notice] = "Post was updated."
-      redirect_to @posts
+      redirect_to [@topics, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :edit
   end
  end
+end
+
+def destroy
+  authorize @post
+  if @post.destroy
 end
 

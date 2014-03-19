@@ -1,10 +1,12 @@
-h1>All Posts</h1>
+<h1>All Posts</h1>
+
+<%= link_to "New Post", new_post_path, class: 'btn btn-success' %>
 <% @posts.each do |post| %>
   <div class="media">
     <div class="media-body">
       <h4 class="media-heading">
-  <%= image_tag(posts.image.tiny.url) %>
-  <p><%= link_to post.title, post %></p>
+   <%= image_tag(posts.image.tiny.url) %>
+  <%= link_to 'post.title', post %>
   </h4>
  </div>
 </div>

@@ -7,7 +7,11 @@ Bloccit::Application.routes.draw do
   end
 
 
-  match "about" =>'welcome#about', via: :get
+  match 'about', to: 'welcome#about', via: :get
 
-  root :to => 'welcome#index'
+  get '/topics/:id', to: 'topics#index', as: 'topics_index'
+
+  post 'topics/new', to: 'topics#index'
+
+  root to: 'welcome#index'
 end

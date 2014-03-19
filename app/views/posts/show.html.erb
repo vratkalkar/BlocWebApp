@@ -1,7 +1,7 @@
-<h1><%= markdown @posts.title %></h1>
+<h1><%= @posts.title %></h1>
 
 <div class="row">
-  <div class="span8">
+  <div class="col-md-8">
     <small>
       <%= image_tag(@posts.user.avatar.tiny.url) if @posts.user.avatar? %>
       submitted <%= time_ago_in_words(@posts.created_at) %> ago by <%= @posts.user.name %>
@@ -9,9 +9,11 @@
     <p><%= markdown @posts.body %></p>
   </div>
   <%= image_tag(posts.image.thumb.url) %>
-  <div class="span4">
-    <% if can? :edit, @posts %>
-     <%= link_to "Edit", edit_topic_post+path(@topics,@posts), class: 'btn btn-large btn-block' %>
+  <div class="col-md-4">
+    <% if policy(@posts) :update, %>
+     <%= link_to "Edit", edit_post_path(@posts), class: 'btn btn-success' %>
+
+     <p><%= @posts.body %></p>
      <% end %>
    </div>
  </div>
