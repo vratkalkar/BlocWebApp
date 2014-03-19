@@ -98,5 +98,8 @@ gem 'protected_attributes'
 
 gem 'unf'
 
+# To paginate app
+
+gem 'will_paginate', '~> 3.0.5'
 
 

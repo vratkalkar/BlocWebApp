@@ -4,11 +4,11 @@ class PostsController < ApplicationController
     @posts = Posts.all
     authorize @posts
   end
+end
 
   def show
     @posts = Posts.find(params[:id])
     @posts = Topics.find(params[:id])
-    @posts = @posts.new
     authorize @posts
   end
 

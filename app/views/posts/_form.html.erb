@@ -1,5 +1,5 @@
-<%= form_for [topic, post], html: { class: 'form-horizontal' } do |f| %>
-  <%= form_for [topic, post] do |f| %>
+<%= form_for [@topics, @posts], html: { class: 'form-horizontal' } do |f| %>
+  <%= form_for [@topics, @posts] do |f| %>
   <% if post.errors.any? %>
     <div class="alert alert-danger">
       <h4>There are <%= pluralize(post.errors.count, "error") %>.</h4>

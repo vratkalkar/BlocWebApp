@@ -24,6 +24,7 @@
        </div>
        <% end %>
      </div>
+      <%= will_paginate @posts %>
       <div class="col-md-4">
        <% if policy(@posts).update %>
         <%= link_to "New Post", new_topics_post_path(@topics), class: 'btn btn-success' %>
