@@ -13,12 +13,12 @@
        <div class="media">
         <div class="media-body">
           <h4 class="media-heading">
-            <%= link_to post.title, [@topics, @posts] %>
+            <%= link_to posts.title, [@topics, @posts] %>
           </h4>
           <small>
-            <%= image_tag(post.user.avatar.tiny.url) if post.uder.avatar? %> submitted <%= time_ago_in_words(post.created_at ) %> ago 
-            <%= post.user %> <br/>
-            <%= post.comments.count %> Comments
+            <%= image_tag(post.user.avatar.tiny.url) if post.under.avatar? %> submitted <%= time_ago_in_words(post.created_at ) %> ago 
+            <%= posts.user %> <br/>
+            <%= posts.comments.count %> Comments
           </small>
         </div>
        </div>

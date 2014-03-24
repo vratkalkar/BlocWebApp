@@ -8,11 +8,13 @@ class TopicsController < ApplicationController
     @topics = Topics.new
     @posts= Posts.all
     authorize @topics
-  end
+ end
+
 
   def show
     @topics = Topics.find(params[:id])
-    @posts = @topics.posts.paginate(page: params[:page], per_page: 10)
+    authorize @topics
+    @posts = Topics.paginate(page: params[:page], per_page: 10)
    
   end
 
@@ -26,7 +28,7 @@ class TopicsController < ApplicationController
     @posts= @topics.posts.build(params[:post])
     authorize @topics
 
-    if @topic.save
+    if @topics.save
       flash[:notice] = "Topic was saved successfully."
       redirect_to @topics
     else
@@ -48,7 +50,7 @@ def update
  end
 end
 
-private 
+
 
 def topics_params
 

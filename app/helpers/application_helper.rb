@@ -6,6 +6,7 @@ module ApplicationHelper
       content_tag :div, capture(&block), class: 'form-group'
     end
   end
+
   
 def markdown(text)
   renderer = Redcarpet::Render::HTML.new
