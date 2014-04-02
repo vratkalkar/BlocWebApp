@@ -1,64 +1,68 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Posts.all
-    authorize @posts
+    @post = Post.all
+    authorize @post
   end
-end
+
 
   def show
-    @posts = Posts.find(params[:id])
-    @posts = Topics.find(params[:id])
-    authorize @posts
+    @post = Post.find(params[:id])
+    @comment = @post.comments.build
+    @post = Topic.find(params[:topic_id])
+    authorize @post
   end
 
   def new
-    @topics = Topics.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
     @post = Post.new
-    authorize @posts
+    authorize @post
+  end
 
   def create
-    @topics = Topics.find(params[:id])
-    @post = current_user.posts.build(params.require(:post].permit(:title, :body))
-    @post.topic = @topics
+    @topic = Topic.find(params[:topic_id])
+    @post= current_user.posts.build(params[:id])
+    @post.topic = @topic
 
   authorize @post
        if @post.save
-          redirect_to [@topics, @post], notice: "Post was saved successfully."
+          redirect_to [@topic, @post], notice: "Post was saved successfully."
      else
          flash[:error] = "There was an error saving the post. Please try again."
        render :new
 
        authorize! :create, @post, message: "You need to be signed up to do that."
-        if @posts.save
+        if @post.save
       end
      end
-    end
-
+   
+  
 
 
   def edit
-    @topics = Topics.find(params[:topic_id])
+    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
-    authorize @posts
+    authorize @post
   end
 
   def update
-    @topics = Topics.find(params[:topic_id])
+    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
     authorize @post
-    if @posts.update(post_params(:posts))
+  end
+    if @post.update(post_params(:posts))
       flash[:notice] = "Post was updated."
-      redirect_to [@topics, @post]
+      redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :edit
   end
  end
-end
+
 
 def destroy
   authorize @post
   if @post.destroy
+ end
 end
-
+end

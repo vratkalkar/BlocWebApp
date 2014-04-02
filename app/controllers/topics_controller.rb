@@ -1,36 +1,36 @@
 class TopicsController < ApplicationController
   def index
-    @topics = Topics.paginate(page: params[:page], per_page: 10)
-    authorize @topics
+    @topic = Topic.all
+    @topics = Topic.paginate(page: params[:page], per_page: 10)
+    authorize @topic
   end
 
   def new
-    @topics = Topics.new
-    @posts= Posts.all
-    authorize @topics
+    @topic = Topic.new
+    @post= Post.all
+    authorize @topic
  end
 
 
   def show
-    @topics = Topics.find(params[:id])
-    authorize @topics
-    @posts = Topics.paginate(page: params[:page], per_page: 10)
+    @topic = Topic.find(params[:id])
+    authorize @topic
+    @post = Topic.paginate(page: params[:page], per_page: 10)
    
   end
 
   def edit
-    @topics = Topics.find(params[:id])
-    authorize @topics
+    @topic = Topic.find(params[:id])
+    authorize @topic
   end
 
   def create
-    @topics = Topics.find(params[:id])
-    @posts= @topics.posts.build(params[:post])
-    authorize @topics
+   @topic= Topic.new(topic_params)
+   authorize @topic
 
-    if @topics.save
+    if @topic.save
       flash[:notice] = "Topic was saved successfully."
-      redirect_to @topics
+      redirect_to @topic
     else
       flash[:error] = "Error creating topic. Please try again."
       render :new
@@ -38,28 +38,30 @@ class TopicsController < ApplicationController
 end
 
 def update
-  @topics = Topics.find(params[:id])
-  #authorize @topics
+  @topic = Topic.find(params[:id])
+  authorize @topic
 
-  if @topics.update(topics_params[])
-   redirect_to @topics, notice: 'Topic was successfully updated.'
+  if @topic.update(topic_params[:id])
+   redirect_to @topic, notice: 'Topic was successfully updated.'
  else
    flash[:error] = "Error saving topic. Please try again"
    render :edit
   end
  end
-end
 
 
 
-def topics_params
+
+def topic_params
 
     params.require(:topic).permit('
         :name
         :description
         :public
+        :topic_id
       ')
   end
+end
 
 
 

@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <% if policy(@topics).update? %>
+    <% if policy(@topic).update? %>
       <%= link_to "New Topic", new_topic_path, class:'btn btn-success' %>
     <% end %>
   </div>
@@ -10,11 +10,11 @@
 
 <div class="row">
   <div class="col-md-8">
-    <% @topics.each do |topics| %>
+    <% @topic.each do |topic| %>
      <div class="media">
       <div class="media-body">
         <h4 class="media-heading">
-          <%= link_to topics.name, topics %>
+          <%= link_to topic.name, topic %>
         </h4>
         <% end %>
         <%= will_paginate @topics %>

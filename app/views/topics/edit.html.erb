@@ -11,14 +11,13 @@
     </ul>
   </div>
   <div class="col-md-8">
-    <%= form_for @topics do |f| %>
+    <%= form_for @topic do |f| %>
       <div class="form-group">
         <%= f.label :name %>
-          <%= f.text_field :name, class: 'form-control', placeholder: "Enter topic name" %>
-        </div>
+          <%= f.text_field :name, placeholder: "Enter topic name" %>
       <div class="form-group">
         <%= f.label :description %>
-        <%= f.text_area :description, rows: 8  class: 'form-control', placeholder: "Enter topic description" %>
+        <%= f.text_area :description, rows: 8 , class: 'form-control', placeholder: "Enter topic description" %>
         </div>
       <div class="form-group">
           <%= f.label :public, class: 'checkbox' do %>
