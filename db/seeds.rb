@@ -1,74 +1,75 @@
 require 'faker'
 
+# Create 15 topics
 topics = []
 15.times do
-  topics << Topics.create(
-    name: Faker::Lorem.words(rand(1..10)).join(" "),
-    description: Faker::Lorem.paragraph(rand(1..4))
-   )
+  topics << Topic.create(
+    name: Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraph
+  )
 end
-
-rand(5..12).times do
-  topics = Topics.first
-  p = u.posts.create(
-      topic: Topics,
-      title: Faker::Lorem.words(rand(1..10)).join(" "),
-      body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))
-
-  p.update_attribute(:created_at, Time.now - rand(600..31536000))
-
-  10.times.do
-   p.comments.create(user_id: User.first.id)
-  end
-   Topics.rotate!
-
-
-
-rand(4..10).times do
+ 
+# Create 5 users with their own topics and posts
+5.times do
   password = Faker::Lorem.characters(10)
-  u = User.new(
+  user = User.new(
     name: Faker::Name.name,
     email: Faker::Internet.email,
     password: password,
-    password_confirmation: password )
-  u.skip_confirmation!
-  u.save
+    password_confirmation: password)
+  user.skip_confirmation!
+  user.save
 
-rand(10..30).times do
-  p = Post.create(
-    title: Faker::Lorem.words(rand(1..10)).join(" "), body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))
-  rand(3..10).times do
-    p.comments.create(body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
+  5.times do
+    topic = topics.first
+    post = Post.create(
+      user: user,
+      topic: topic,
+      title: Faker::Lorem.sentence,
+      body: Faker::Lorem.paragraph)
+    # set the created_at to a time within the past year
+    post.update_attribute(:created_at, Time.now - rand(600..31536000))
+
+    topics.rotate!
   end
- end
 end
 
-u = User.new(
-   name: 'Admin User',
-   email: 'admin@example.com',
-   password: 'helloworld',
-   password_confirmation: 'helloworld')
-u.skip_confirmation!
-u.save
-u.update_attribute(:role, 'admin')
+post_count = Post.count
+  4.times do
+    post = Post.find(rand(1..post_count))
+  end
 
-u = User.new(
+
+# Create an admin user
+admin = User.new(
+  name: 'Admin User',
+  email: 'admin@example.com',
+  password: 'helloworld',
+  password_confirmation: 'helloworld')
+admin.skip_confirmation!
+admin.save
+admin.update_attribute(:role, 'admin')
+
+# Create a moderator
+moderator = User.new(
   name: 'Moderator User',
-  email: 'moderator@example.com', 
-  password: 'helloworld', 
+  email: 'moderator@example.com',
+  password: 'helloworld',
   password_confirmation: 'helloworld')
-u.skip_confirmation!
-u.save
-u.update_attribute(:role, 'moderator')
+moderator.skip_confirmation!
+moderator.save
+moderator.update_attribute(:role, 'moderator')
 
-u = User.new(
+# Create a member
+member = User.new(
   name: 'Member User',
-  email: 'member@example.com', 
-  password: 'helloworld', 
+  email: 'member@example.com',
+  password: 'helloworld',
   password_confirmation: 'helloworld')
-u.skip_confirmation!
-u.save
+member.skip_confirmation!
+member.save
 
 puts "Seed finished"
+puts "#{User.count} users created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"

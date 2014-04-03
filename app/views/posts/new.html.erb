@@ -11,20 +11,16 @@
     </ul>
   </div>
   <div class="col-md-8">
-     <%= form_for :posts do |f| %>
+     <%= form_for [@topic, @post] do |f| %>
      <div class="form-group">
-       <%= f.label :name %>
-       <%= f.text_field :name, class: 'form-control', placeholder: "Enter post name" %>
+       <%= f.label :title %>
+       <%= f.text_field :title, class: 'form-control', placeholder: "Enter post name" %>
       </div>
       <div class="form-group">
-        <%= f.label :description %>
-        <%= f.text_area :description, rows: 8, class: 'form-control', placeholder: "Enter post description" %>
+        <%= f.label :title %>
+        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post description" %>
       </div>
-      <div class="form-group">
-        <%= f.label :public, class: 'checkbox' do %>
-         <%= f.check_box :public %> Public post
-        <% end %>
-      </div>
+     <div>
        <%= f.submit "Save", class: 'btn btn-success' %>
       <% end %>
     </div>

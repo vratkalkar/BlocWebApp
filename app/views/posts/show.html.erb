@@ -1,21 +1,20 @@
-<h1><%= @posts.title %></h1>
+<h1><%= @post.title %></h1>
 
 <div class="row">
   <div class="col-md-8">
     <small>
-      <%= image_tag(@posts.user.avatar.tiny.url) if @posts.user.avatar? %>
-      submitted <%= time_ago_in_words(@posts.created_at) %> ago by <%= @posts.user.name %>
+      <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
+      submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
     </small>
     <p><%= markdown @posts.body %></p>
   </div>
   <%= image_tag(posts.image.thumb.url) %>
   <div class="col-md-4">
-    <% if policy(@posts) :update, %>
-     <%= link_to "Edit", new_post_path(@posts), class: 'btn btn-success' %>
+    <% if policy(@post).update? %>
+     <%= link_to "Edit", new_post_path(@post), class: 'btn btn-success' %>
 
-     <p><%= @posts.body %></p>
+     <p><%= @post.body %></p>
 
-     <%= render partial: 'comments/comment', locals: { comment: comment } %>
      <% end %>
    </div>
  </div>

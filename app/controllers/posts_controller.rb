@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+  before_filter :find_topic
+
+  def find_topic
+   @topic = Topic.find(params[:topic_id])
+ end
 
   def index
     @post = Post.all
@@ -15,26 +20,23 @@ class PostsController < ApplicationController
 
   def new
     @topic = Topic.find(params[:topic_id])
-    @post = Post.new
-    authorize @post
-  end
+    @post = @topic.posts.new
+end
 
   def create
     @topic = Topic.find(params[:topic_id])
-    @post= current_user.posts.build(params[:id])
+    @post = current_user.posts.build(params.require(:post).permit(:title, :body))
     @post.topic = @topic
 
-  authorize @post
-       if @post.save
-          redirect_to [@topic, @post], notice: "Post was saved successfully."
-     else
-         flash[:error] = "There was an error saving the post. Please try again."
-       render :new
+    authorize @post
+    if @post.save
+      redirect_to [@topic, @post], notice: "Post was saved successfully."
+    else
+      flash[:error] = "There was an error saving the post. Please try again."
+      render :new
+    end
+  end
 
-       authorize! :create, @post, message: "You need to be signed up to do that."
-        if @post.save
-      end
-     end
    
   
 
@@ -49,20 +51,24 @@ class PostsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
     authorize @post
-  end
-    if @post.update(post_params(:posts))
+    if @post.update_attributes(params.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
       redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
-      render :edit
+      render :new
+    end
   end
- end
+
 
 
 def destroy
   authorize @post
   if @post.destroy
  end
+
 end
 end
+
+
+
