@@ -4,8 +4,9 @@ class CreateComments < ActiveRecord::Migration
       t.text :body
       t.references :post, index: true
 
+
       t.timestamps
     end
-     add_index :comments, :user_id
+     add_index :comments, :post_id
   end
 end

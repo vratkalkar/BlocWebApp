@@ -1,6 +1,12 @@
-class CommentsPolicy < ApplicationPolicy
+class CommentPolicy < ApplicationPolicy
 
   def create?
-    user.present? && (record.user == user) || user.role?(:admin) || user.role(:moderator) || user.role(:member))
-  end
+   user.present? && (record.user == user || user.role?(:admin) || user.role?(:member))
+   end
+  
+
+def destroy?
+  user.present? && (record.user == user || user.role(:admin) || user.role?(:member))
+ end
 end
+

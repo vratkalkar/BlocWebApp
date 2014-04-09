@@ -5,13 +5,14 @@ class PostPolicy < ApplicationPolicy
   end
 
    def update?
-    user.present? && (record.user == user) || user.role?(:admin) || user.role(:member)
+    user.present? && (record.user == user || user.role?(:admin) || user.role?(:member))
    end
   end
+  
  
 
   def destroy?
-    user.present? && (record.user == user || user.role?(:admin) || user.role(:moderator))
+    user.present? && (record.user == user || user.role?(:admin) || user.role?(:moderator))
   end
  
 

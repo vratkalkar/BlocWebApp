@@ -12,10 +12,8 @@ class PostsController < ApplicationController
 
 
   def show
-    @post = Post.find(params[:id])
-    @comment = @post.comments.build
-    @post = Topic.find(params[:topic_id])
-    authorize @post
+   @post = Post.find(params[:id])
+   @comments = @post.comments
   end
 
   def new
@@ -24,21 +22,19 @@ class PostsController < ApplicationController
 end
 
   def create
-    @topic = Topic.find(params[:topic_id])
-    @post = current_user.posts.build(params.require(:post).permit(:title, :body))
-    @post.topic = @topic
+   @topic = Topic.find(params[:topic_id])
+   @post = current_user.posts.build(params[:post])
+   @post.topic= @topic
 
     authorize @post
     if @post.save
-      redirect_to [@topic, @post], notice: "Post was saved successfully."
+      redirect_to [@topic], notice: "Post was saved successfully."
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :new
     end
   end
 
-   
-  
 
 
   def edit
@@ -50,7 +46,6 @@ end
   def update
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
-    authorize @post
     if @post.update_attributes(params.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
       redirect_to [@topic, @post]
@@ -60,15 +55,22 @@ end
     end
   end
 
-
-
 def destroy
+  @topic = Topic.find(params[:topic_id])
+  @post = Post.find(params[:id])
+
+  title = @post.title
   authorize @post
+
   if @post.destroy
+     flash[:notice] = "\"#{title}\" was deleted successfully."
+     redirect_to @topic
+    else
+      flash[:error] = "There was an error deleting the post."
+      render :show
+    end
+
  end
-
 end
-end
-
 
 
