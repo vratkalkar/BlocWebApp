@@ -1,13 +1,14 @@
-<h1><%= @post.title%></h1>
+
 
  <div class="row">
  <div class="col-md-8">
+  <%= render partial: 'votes/voter', locals: { topic: @topic, post: @post } %>
+  <h1><%= @post.title%></h1>
      <small>
        submitted <%= time_ago_in_words(@post.created_at) %> ago
      </small>
-    <p><%= @post.body %></p>
 </div>
-    <div class="col-md-4">
+    <div class="media">
        <% if policy(@post).edit? %>
        <%= link_to "Edit", edit_topic_post_path(@topic,@post), class: 'btn btn-success' %>
        <% end %>
@@ -16,6 +17,15 @@
        <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-danger', confirm: "Are you sure you want to delete this post?" %>
        <% end %>
     </div>
+
+    <div>
+      <h3><%= pluralize(@post.points, 'point') %></h3>
+      <small>
+        <%= pluralize(@post.up_votes, 'up vote') %>,
+        <%= pluralize(@post.down_votes, 'down vote') %>
+      </small>
+    </div>
+
     <div>
      <%= render partial: "comments/comment", collection: @comments %>
      <%= render partial: "comments/form" %>

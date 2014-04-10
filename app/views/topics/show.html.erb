@@ -8,8 +8,9 @@
     <div class="col-md-8">
       <p class="lead"><%= @topic.description %></p>
           <div class="media">
-            <div class="media-body">
                <% @posts.each do |post| %>
+               <div class="media">
+               <%= render partial: 'votes/voter', locals: { topic: @topic, post: post} %>
                <h4 class="media-heading">
                 <%= link_to post.title , topic_post_path(@topic, post) %>
                </h4>
