@@ -7,6 +7,7 @@
      <small>
        submitted <%= time_ago_in_words(@post.created_at) %> ago
      </small>
+    <p class="lead"><%= @post.body %></p>
 </div>
     <div class="media">
        <% if policy(@post).edit? %>
@@ -25,8 +26,11 @@
         <%= pluralize(@post.down_votes, 'down vote') %>
       </small>
     </div>
+    <div class="pull-left">
+    <%= render partial: 'favorites/favorite', locals: { topic: @topic, post: @post} %>
+  </div>
 
-    <div>
+    <div class="col-md-8">
      <%= render partial: "comments/comment", collection: @comments %>
      <%= render partial: "comments/form" %>
    </div>

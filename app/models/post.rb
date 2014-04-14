@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   belongs_to :user
   belongs_to :topic
   attr_accessible :body, :title, :topic, :image, :name
@@ -33,7 +34,7 @@ class Post < ActiveRecord::Base
     age = (self.created_at - Time.new(1970,1,1))/ 86400
     new_rank = points + age
 
-    self.update_attribute(:rank, new_rank)
+    #self.update_attribute(:rank, new_rank)
  end
 
 
