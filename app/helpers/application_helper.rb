@@ -16,3 +16,9 @@ def markdown(text)
   end
  end
 
+ def comment_url_helper(comment)
+  post = comment.post
+  topic = post.topic
+  [topic, post, comment]
+ end
+
