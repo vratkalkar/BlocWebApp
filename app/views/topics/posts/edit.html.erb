@@ -1,0 +1,15 @@
+<h1>Edit Post</h1>
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for new posts:</p>
+    <ul>
+      <li>Add a title</li>
+      <li>Add a message</li>
+      <li>Add your name</li>
+      <li>Remember to click "Save"</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+   <%= render partial: 'form', locals: {topic: @topics, post: @post}%>
+ </div>
+</div>
