@@ -102,4 +102,10 @@ gem 'unf'
 
 gem 'will_paginate', '~> 3.0.5'
 
+# Install RSpec
+ 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 
