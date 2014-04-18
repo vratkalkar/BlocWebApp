@@ -34,3 +34,5 @@ describe "down_vote" do
   end
 end
 
+end
+
