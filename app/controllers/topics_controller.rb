@@ -38,7 +38,7 @@ def update
   @topic = Topic.find(params[:id])
   authorize @topic
 
-  if @topic.update(topic_params[:id])
+  if @topic.update(params[:topic_id])
    redirect_to @topic, notice: 'Topic was successfully updated.'
  else
    flash[:error] = "Error saving topic. Please try again"
