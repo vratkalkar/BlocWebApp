@@ -26,6 +26,9 @@
         <%= pluralize(@post.down_votes, 'down vote') %>
       </small>
     </div>
+    <div>
+      <div class="js-comments-count"><%= pluralize(@post.comments.count, "Comment") %></div>
+    </div>
     <div class="pull-left">
     <%= render partial: 'favorites/favorite', locals: { topic: @topic, post: @post} %>
   </div>
