@@ -27,14 +27,16 @@
       </small>
     </div>
     <div>
-      <div class="js-comments-count"><%= pluralize(@post.comments.count, "Comment") %></div>
+      
     </div>
     <div class="pull-left">
     <%= render partial: 'favorites/favorite', locals: { topic: @topic, post: @post} %>
   </div>
-
-    <div class="col-md-8">
-     <%= render partial: "comments/comment", collection: @comments %>
+  <div>
+  <h2 class="js-comments-count"><%= @comments.count %> Comments</h2>
+    <div class="js-comments">
+      <%= render partial: "comments/comment", collection: @comments %>
+   </div>
      <%= render partial: "comments/form" %>
    </div>
 

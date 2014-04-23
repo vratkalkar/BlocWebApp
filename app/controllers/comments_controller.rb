@@ -8,6 +8,9 @@ class CommentsController < ApplicationController
 
     @comment = current_user.comments.build( comment_params )
     @comment.post = @post
+    @new_comment = Comment.new
+
+    authorize @comment
     
     if @comment.save
       flash[:notice] = "Comment was created."
@@ -29,6 +32,7 @@ class CommentsController < ApplicationController
 
     if @comment.destroy
       flash[:notice] = "Comment was removed."
+
     else
       flash[:error] = "Comment couldn't be deleted. Try again."
     end
